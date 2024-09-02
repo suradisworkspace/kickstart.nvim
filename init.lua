@@ -713,6 +713,19 @@ require('lazy').setup({
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { "prettier" },
+        typescript = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescriptreact = { "prettier" },
+        svelte = { "prettier" },
+        css = { "prettier" },
+        html = { "prettier" },
+        json = { "prettier" },
+        yaml = { "prettier" },
+        markdown = { "prettier" },
+        graphql = { "prettier" },
+        liquid = { "prettier" },
+        python = { "isort", "black" },
       },
     },
   },
@@ -752,6 +765,7 @@ require('lazy').setup({
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'onsails/lspkind.nvim',
     },
     config = function()
       -- See `:help cmp`
@@ -760,6 +774,40 @@ require('lazy').setup({
       luasnip.config.setup {}
 
       cmp.setup {
+        window = {
+          completion = {
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+            col_offset = -3,
+            side_padding = 0,
+          },
+        },
+        formatting = {
+          fields = { "abbr", "kind", "menu" },
+          format = require("lspkind").cmp_format({
+            mode = 'symbol_text',
+            menu = ({
+              buffer = "[Buffer]",
+              nvim_lsp = "[LSP]",
+              luasnip = "[LuaSnip]",
+              nvim_lua = "[Lua]",
+              latex_symbols = "[Latex]",
+              lazydev = '[Lazydev]',
+              path = '[Path]',
+            }),
+            maxwidth = 100,
+            ellipsis_char = '...',
+            show_labelDetails = true,
+
+            before = function (entry, vim_item)
+              return vim_item
+            end
+          })
+        },
+        sorting = {
+          comparators = { 
+            cmp.config.compare.recently_used 
+          }, 
+        },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -827,7 +875,7 @@ require('lazy').setup({
           },
           { name = 'luasnip' },
           { name = 'nvim_lsp' },
-          { name = 'path' },
+          -- { name = 'path' },
         },
       }
     end,
