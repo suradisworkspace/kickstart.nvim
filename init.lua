@@ -635,7 +635,7 @@ require('lazy').setup({
         tailwindcss = {},
         svelte = {},
         graphql = {},
-        emmet_ls = {},
+        -- emmet_ls = {}, 
         prismals = {},
       }
 
@@ -803,11 +803,11 @@ require('lazy').setup({
             end
           })
         },
-        sorting = {
-          comparators = { 
-            cmp.config.compare.recently_used 
-          }, 
-        },
+        -- sorting = {
+        --   comparators = { 
+        --     cmp.config.compare.recently_used 
+        --   }, 
+        -- },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -833,10 +833,23 @@ require('lazy').setup({
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
           ['<C-y>'] = cmp.mapping.confirm { select = true },
-          ['<Tab>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.confirm { select = true }
+            elseif luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            else
+              fallback()
+            end
+            -- if luasnip.expand_or_locally_jumpable() then
+            --   luasnip.expand_or_jump()
+            -- else
+            --   cmp.mapping.confirm { select = true }
+            -- end
+          end, {'i', 's'}),
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<CR>'] = cmp.mapping.confirm { select = true },
           --['<Tab>'] = cmp.mapping.select_next_item(),
           --['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
@@ -874,7 +887,17 @@ require('lazy').setup({
             group_index = 0,
           },
           { name = 'luasnip' },
-          { name = 'nvim_lsp' },
+          { name = 'nvim_lsp',
+            -- entry_filter = function(entry)
+            --   if
+            --     entry:get_kind() == require("cmp.types").lsp.CompletionItemKind.Snippet
+            --     and entry.source:get_debug_name() == "nvim_lsp:emmet_ls"
+            --   then
+            --     return false
+            --   end
+            --   return true
+            -- end, 
+          },
           -- { name = 'path' },
         },
       }
