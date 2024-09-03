@@ -41,6 +41,10 @@ return {
                     return {
                         Comment = { fg = colors.green, bg = "NONE", italic = true },
                         GitSignsCurrentLineBlame = { fg = "#000000", bg = "NONE", italic = true },
+                        GitSignsAdd = { bg = "#0f8a0f" },
+                        DiffAdd = { bg = "#0f8a0f" },
+                        DiffText = { bg = "#82820f" },
+                        DiffDelete = { bg = "#8a0f0f" },
                         ["@property"] = { fg = colors.magenta, bold = true },
                     }
                 end,
