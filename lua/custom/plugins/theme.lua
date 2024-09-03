@@ -32,7 +32,6 @@ return {
         
                     -- Example:
                     Comment = { fg = "#696969", bg = "NONE", italic = true },
-        
                     -- Complete list can be found in `lua/cyberdream/theme.lua`
                 },
         
@@ -41,6 +40,7 @@ return {
                     -- Example:
                     return {
                         Comment = { fg = colors.green, bg = "NONE", italic = true },
+                        GitSignsCurrentLineBlame = { fg = "#000000", bg = "NONE", italic = true },
                         ["@property"] = { fg = colors.magenta, bold = true },
                     }
                 end,
