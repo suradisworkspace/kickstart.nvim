@@ -631,11 +631,11 @@ require('lazy').setup({
           },
         },
         html = {},
-        cssls= {},
+        cssls = {},
         tailwindcss = {},
         svelte = {},
         graphql = {},
-        -- emmet_ls = {}, 
+        -- emmet_ls = {},
         prismals = {},
       }
 
@@ -652,11 +652,11 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
-        "prettier", -- prettier formatter
-        "isort", -- python formatter
-        "black", -- python formatter
-        "pylint",
-        "eslint_d",
+        'prettier', -- prettier formatter
+        'isort', -- python formatter
+        'black', -- python formatter
+        'pylint',
+        'eslint_d',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
       require('mason-lspconfig').setup {
@@ -667,8 +667,8 @@ require('lazy').setup({
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            if server_name == "tsserver" then
-              require('lspconfig')["ts_ls"].setup(server)
+            if server_name == 'tsserver' then
+              require('lspconfig')['ts_ls'].setup(server)
             else
               require('lspconfig')[server_name].setup(server)
             end
@@ -717,19 +717,19 @@ require('lazy').setup({
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
-        javascript = { "prettier" },
-        typescript = { "prettier" },
-        javascriptreact = { "prettier" },
-        typescriptreact = { "prettier" },
-        svelte = { "prettier" },
-        css = { "prettier" },
-        html = { "prettier" },
-        json = { "prettier" },
-        yaml = { "prettier" },
-        markdown = { "prettier" },
-        graphql = { "prettier" },
-        liquid = { "prettier" },
-        python = { "isort", "black" },
+        javascript = { 'prettier' },
+        typescript = { 'prettier' },
+        javascriptreact = { 'prettier' },
+        typescriptreact = { 'prettier' },
+        svelte = { 'prettier' },
+        css = { 'prettier' },
+        html = { 'prettier' },
+        json = { 'prettier' },
+        yaml = { 'prettier' },
+        markdown = { 'prettier' },
+        graphql = { 'prettier' },
+        liquid = { 'prettier' },
+        python = { 'isort', 'black' },
       },
     },
   },
@@ -780,37 +780,37 @@ require('lazy').setup({
       cmp.setup {
         window = {
           completion = {
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+            winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
             col_offset = -3,
             side_padding = 0,
           },
         },
         formatting = {
-          fields = { "abbr", "kind", "menu" },
-          format = require("lspkind").cmp_format({
+          fields = { 'abbr', 'kind', 'menu' },
+          format = require('lspkind').cmp_format {
             mode = 'symbol_text',
-            menu = ({
-              buffer = "[Buffer]",
-              nvim_lsp = "[LSP]",
-              luasnip = "[LuaSnip]",
-              nvim_lua = "[Lua]",
-              latex_symbols = "[Latex]",
+            menu = {
+              buffer = '[Buffer]',
+              nvim_lsp = '[LSP]',
+              luasnip = '[LuaSnip]',
+              nvim_lua = '[Lua]',
+              latex_symbols = '[Latex]',
               lazydev = '[Lazydev]',
               path = '[Path]',
-            }),
+            },
             maxwidth = 100,
             ellipsis_char = '...',
             show_labelDetails = true,
 
-            before = function (entry, vim_item)
+            before = function(entry, vim_item)
               return vim_item
-            end
-          })
+            end,
+          },
         },
         -- sorting = {
-        --   comparators = { 
-        --     cmp.config.compare.recently_used 
-        --   }, 
+        --   comparators = {
+        --     cmp.config.compare.recently_used
+        --   },
         -- },
         snippet = {
           expand = function(args)
@@ -850,10 +850,10 @@ require('lazy').setup({
             -- else
             --   cmp.mapping.confirm { select = true }
             -- end
-          end, {'i', 's'}),
+          end, { 'i', 's' }),
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          ['<CR>'] = cmp.mapping.confirm { select = true },
+          -- ['<CR>'] = cmp.mapping.confirm { select = true },
           --['<Tab>'] = cmp.mapping.select_next_item(),
           --['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
@@ -891,7 +891,8 @@ require('lazy').setup({
             group_index = 0,
           },
           { name = 'luasnip' },
-          { name = 'nvim_lsp',
+          {
+            name = 'nvim_lsp',
             -- entry_filter = function(entry)
             --   if
             --     entry:get_kind() == require("cmp.types").lsp.CompletionItemKind.Snippet
@@ -900,7 +901,7 @@ require('lazy').setup({
             --     return false
             --   end
             --   return true
-            -- end, 
+            -- end,
           },
           -- { name = 'path' },
         },
