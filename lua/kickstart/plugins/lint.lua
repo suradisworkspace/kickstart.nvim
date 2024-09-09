@@ -2,15 +2,6 @@ return {
 
   { -- Linting
     'mfussenegger/nvim-lint',
-    opts = {
-      linters = {
-        eslint_d = {
-          args = {
-            '--no-warn-ignored',
-          },
-        },
-      },
-    },
     event = { 'BufReadPre', 'BufNewFile', 'InsertLeave' },
     config = function()
       local lint = require 'lint'
